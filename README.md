@@ -37,7 +37,7 @@ The world consists of a Cartesian coordinate grid, where addresses are represent
 
 Amazon and UPS systems can send and receive messages to and from the World simulation server to control their components. The supported commands and responses can be found in the provided `.proto` files (amazon.proto and ups.proto).
 
-For more details on the available Amazon and UPS commands, refer to the [project description](https://github.com/username/mini-amazon/blob/main/Project_Description.pdf).
+For more details on the available Amazon and UPS commands, refer to the [project description](https://github.com/syhuang22/Mini-Amazon/blob/main/amazon_services/proto_files/Mini-Amazon%20Spec.pdf).
 
 ## Protocol Specification
 
