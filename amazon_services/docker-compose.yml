@@ -1,0 +1,69 @@
+version: '3'
+
+services:
+  ui:
+    build: ./UI_API
+    ports:
+      - "7777:7777"
+    environment:
+      - DB_URL=postgresql://postgres:postgres@postgres:5432/postgres
+    depends_on:
+      - db
+
+  ups:
+    build: ./UPS_API
+    ports:
+      - "6543:6543"
+    environment:
+      - DB_URL=postgresql://postgres:postgres@postgres:5432/postgres
+    depends_on:
+      - db
+      
+  world:
+    build: ./WORLD_API
+    ports:
+      - "9487:9487"
+    environment:
+      - DB_URL=postgresql://postgres:postgres@postgres:5432/postgres
+    depends_on:
+      - db
+      - ups
+      - ui
+
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+  web-init:
+      build: ./amazon_website
+      command: /code/initserver.sh
+      volumes:
+        - ./amazon_website:/code
+      depends_on:
+        - db
+  web:
+      build: ./amazon_website
+      user: nobody
+      command: /code/runserver.sh
+      volumes:
+        - ./amazon_website:/code
+      expose:
+        - "8000"
+      depends_on:
+        - web-init
+  nginx:
+     image: nginx:latest
+     ports:
+       - "8000:8000"
+     volumes:
+       - ./nginx/config:/etc/nginx/conf.d
+     depends_on:
+       - web
+
+volumes:
+  dbdata:

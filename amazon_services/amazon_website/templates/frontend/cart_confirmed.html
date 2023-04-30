@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Order Confirmation{% endblock %}
+
+{% block content %}
+<div class="container mt-5" style="background: linear-gradient(to bottom, #000000, #c36609);">
+  <h1 class="display-4 mb-4 text-white font-weight-bold">Order Confirmation</h1>
+  <p class="display-6 mb-4 text-white font-weight-bold">Your order has been placed successfully!</p>
+  {% if purchase_fail %}
+      {% if purchase_fail|length > 0 %}
+          {% for key, value in purchase_fail.items %}
+              {% if value %}
+                  <p class="display-7 mb-4 text-white font-weight-bold">The following product purchase failed, either due to insufficient inventory or the product does not exist. </p>
+                  <ul>
+                    {% for item in value %}
+                    <div class="col-md-6">
+                      <div class="card bg-light mb-3">
+                        <div class="card-body">
+                            {% for k, v in item.items %}
+                              <p>{{ k }}: {{ v }}</p>
+                            {% endfor %}
+                        </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+                  </ul>
+              {% endif %}
+          {% endfor %}
+      {% endif %}
+  {% endif %}
+  <form method="get" action="{% url 'order_status' %}">
+    <button type="submit" class="btn btn-warning btn-sm btn-block">See order status</button>
+  </form>
+</div>
+{% endblock %}

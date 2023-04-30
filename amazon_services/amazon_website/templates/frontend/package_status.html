@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Status{% endblock %}
+
+{% block content %}
+  <h1>Order status</h1>
+
+  {% if orders %}
+    <table>
+      <thead>
+        <tr>
+          <th>Order id</th>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>destination_x</th>
+          <th>destination_y</th>
+          <th>user id</th>
+          <th>status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders %}
+          <tr>
+            <td>{{ order.package.package_id }}</td>
+            <td>{{ order.product.description }}</td>
+            <td>{{ order.quantity }}</td>
+            <td>{{ order.package.destination_x }}</td>
+            <td>{{ order.package.destination_y }}</td>
+            <td>{{ order.package.user_id }}</td>
+            <td>{{ order.package.status }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  {% else %}
+  <p>{{ error_message }}</p>
+  {% endif %}
+
+{% endblock %}

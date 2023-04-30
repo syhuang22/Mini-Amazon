@@ -1,0 +1,50 @@
+syntax = "proto2";
+
+message UtoAzConnect {
+	required int64 worldid = 1;
+}
+
+message AzConnected {
+	required int64 worldid = 1;
+	required string result = 2;
+}
+
+message AItem {
+    required string description = 1;
+    required int64 count = 2;
+}
+
+message ASendTruck {
+	required int64 package_id = 1;
+	required int64 warehouse_id = 2;
+	optional int64 user_id = 3;
+	required int64 x = 4;
+	required int64 y = 5;
+	repeated AItem items = 6;
+}
+
+message UTruckAtWH {
+	required int64 truck_id = 1;
+	required int64 warehouse_id = 2;
+	required int64 package_id = 3;
+}
+
+message ATruckLoaded {
+	required int64 truck_id = 1;
+	required int64 warehouse_id = 2;
+	required int64 package_id = 3;
+}
+
+message UPackageDelivered {
+	required int64 package_id = 3;
+}
+
+message UMessage{
+	optional UTruckAtWH truckAtWH = 1;
+	optional UPackageDelivered packageDelivered= 2;
+}
+
+message AMessage{
+	optional ASendTruck sendTruck = 1;
+	optional ATruckLoaded truckLoaded= 2;
+}

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-5" style="background: linear-gradient(to bottom, #000000, #c36609);">
+    <p class="display-6 mb-4 text-white font-weight-bold">Your cart is empty.</p>
+    <form method="get" action="{% url 'home' %}">
+      <button type="submit" class="btn btn-secondary btn-sm btn-block">Back to home</button>
+    </form>
+  </div>
+{% endblock %}

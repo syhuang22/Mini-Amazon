@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5" style="background: linear-gradient(to bottom, #000000, #c36609);">
+  {% if items %}
+    <table class="display-7 mb-4 text-white font-weight-bold">
+      <thead>
+        <tr>
+          <th>Product id</th>
+          <th>Product Name</th>
+          <th>Quantity</th>
+          <th>Destination X</th>
+          <th>Destination Y</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in items %}
+        <tr style="background-color: white;">
+          <td style="background-color: white; color: black;">{{ item.product_id }}</td>
+          <td style="background-color: white; color: black;">{{ item.description }}</td>
+          <td style="background-color: white; color: black;">{{ item.quantity }}</td>
+          <td style="background-color: white; color: black;">{{ item.destination_x }}</td>
+          <td style="background-color: white; color: black;">{{ item.destination_y }}</td>
+          <td style="background-color: white; color: black;">
+            <form action="{% url 'modify_form' item.product_id item.description item.quantity item.destination_x item.destination_y %}" method="get">
+              <button type="submit" class="btn btn-secondary btn-sm">Edit</button>
+            </form>
+          </td>
+          <td style="background-color: white; color: black;">
+            <form action="{% url 'cancel_form' item.product_id item.description item.quantity item.destination_x item.destination_y %}" method="get">
+              <button type="submit" class="btn btn-secondary btn-sm">Cancel</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th, td {
+        padding: 8px;
+        text-align: left;
+        border: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #FFA500;
+        color: white !important;
+      }
+
+    </style>
+    <form method="post" action="{% url 'Cartbuy' %}">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-warning btn-sm btn-block">Buy All</button>
+    </form>
+    <form method="get" action="{% url 'clear_cart' %}">
+      <button type="submit" class="btn btn-warning btn-sm btn-block">Clear cart</button>
+    </form>
+  {% else %}
+    <p class="display-6 mb-4 text-white font-weight-bold">Your cart is empty.</p>
+  {% endif %}
+
+  <form method="get" action="{% url 'buy' %}">
+    <button type="submit" class="btn btn-secondary btn-sm btn-block">Back to buy</button>
+  </form>
+
+  <form method="get" action="{% url 'home' %}">
+    <button type="submit" class="btn btn-secondary btn-sm btn-block">Back to home</button>
+  </form>
+  </div>
+{% endblock %}

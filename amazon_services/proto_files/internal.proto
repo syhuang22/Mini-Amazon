@@ -1,0 +1,13 @@
+syntax = "proto2";
+
+message Product {
+ required string description = 1;
+    required int64 count = 2;
+}
+
+message Request {
+    optional int64 user_id = 1;
+    required int64 x = 2;
+    required int64 y = 3;
+    repeated Product product = 4;
+}

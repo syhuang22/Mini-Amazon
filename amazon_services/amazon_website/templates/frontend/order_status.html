@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-5" style="background: linear-gradient(to bottom, #000000, #c36609);">
+    <h1 class="display-4 mb-4 text-white font-weight-bold">My Orders</h1>
+    {% if orders %}
+      <table class="display-7 mb-4 text-white font-weight-bold">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Package ID</th>
+            <th>destination_x</th>
+            <th>destination_y</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in orders %}
+            <tr>
+              <td style="background-color: white; color: black;">{{ order.order_id }}</td>
+              <td style="background-color: white; color: black;">{{ order.product.description }}</td>
+              <td style="background-color: white; color: black;">{{ order.quantity }}</td>
+              <td style="background-color: white; color: black;">{{ order.package.package_id }}</td>
+              <td style="background-color: white; color: black;">{{ order.package.destination_x }}</td>
+              <td style="background-color: white; color: black;">{{ order.package.destination_y }}</td>
+              <td style="background-color: white; color: black;">{{ order.package.status }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <style>
+        table {
+          width: 100%;
+          border-collapse: collapse;
+        }
+
+        th, td {
+          padding: 8px;
+          text-align: left;
+          border: 1px solid #ddd;
+        }
+
+        th {
+          background-color: #FFA500;
+          color: white;
+        }
+      </style>
+    {% else %}
+      <p class="display-6 mb-4 text-white font-weight-bold">You have no orders.</p>
+    {% endif %}
+    <form method="get" action="{% url 'buy' %}">
+      <button type="submit" class="btn btn-secondary btn-sm btn-block">Back to buy</button>
+    </form>
+    <form method="get" action="{% url 'home' %}">
+      <button type="submit" class="btn btn-secondary btn-sm btn-block">Back to home</button>
+    </form>
+  </div>
+{% endblock %}

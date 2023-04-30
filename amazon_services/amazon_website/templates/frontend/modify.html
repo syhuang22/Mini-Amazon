@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Search Package Status{% endblock %}
+
+{% block content %}
+
+<form method="post" action="{% url 'modify_order' %}">
+  {% csrf_token %}
+  {% for item in cart_items %}
+      <div>
+          <label for="description_{{ item.id }}">Description:</label>
+          <input type="text" name="description_{{ item.id }}" value="{{ item.description }}">
+      </div>
+      <div>
+          <label for="quantity_{{ item.id }}">Quantity:</label>
+          <input type="number" name="quantity_{{ item.id }}" value="{{ item.quantity }}">
+      </div>
+      <hr>
+  {% endfor %}
+  <button type="submit">Update Cart</button>
+</form>
+{% endblock %}

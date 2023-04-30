@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Product{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1>Add a New Product</h1>
+    <form method="post">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="description" class="form-label">Description:</label>
+        <input type="text" class="form-control" name="description">
+      </div>
+      <div class="mb-3">
+        <label for="count" class="form-label">Count:</label>
+        <input type="number" class="form-control" name="count" min="0">
+      </div>
+      <button type="submit" class="btn btn-primary">Add Product</button>
+    </form>
+  </div>
+{% endblock %}

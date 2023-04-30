@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Search Package Status{% endblock %}
+
+{% block content %}
+  <h1>Search package status</h1>
+  <p>Input the package id to check the package status:</p>
+
+  <form method="get" action="{% url 'Order_Status' %}">
+    <input type="number" name="package_id" required placeholder="Search product status...">
+    <button type="submit">Search</button>
+  </form>
+
+{% endblock %}

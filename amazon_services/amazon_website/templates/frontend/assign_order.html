@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Assign Order{% endblock %}
+
+{% block content %}
+  <h1>Assign Order</h1>
+  <form method="post">
+    {% csrf_token %}
+    <label for="quantity">Quantity:</label>
+    <input type="number" name="quantity" required><br>
+
+    <label for="destination_x">Destination X:</label>
+    <input type="number" name="destination_x" required><br>
+
+    <label for="destination_y">Destination Y:</label>
+    <input type="number" name="destination_y" required><br>
+
+    <button type="submit">Assign</button>
+  </form>
+{% endblock %}

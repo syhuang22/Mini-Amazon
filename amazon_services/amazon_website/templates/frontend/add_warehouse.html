@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Warehouse{% endblock %}
+
+{% block content %}
+  <h1>Add Warehouse</h1>
+  <form method="post" action="{% url 'add_warehouse' %}">
+    {% csrf_token %}
+    <label for="location_x">Location X:</label>
+    <input type="number" name="location_x" id="location_x" required>
+
+    <label for="location_y">Location Y:</label>
+    <input type="number" name="location_y" id="location_y" required>
+
+    <button type="submit">Add Warehouse</button>
+  </form>
+  {% if warehouses %}
+        <h2>All warehouses</h2>
+        <ul>
+        {% for warehouse in warehouses %}
+            <li> Location X: {{ warehouse.location_x }}, Location Y: {{ warehouse.location_y }}</li>
+        {% empty %}
+            <li>No warehouse found.</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Please add a warehouse.</p>
+    {% endif %}
+
+    <p>
+        <button onclick="window.location.href='{% url 'home' %}'">Back to home</button>
+    </p>
+{% endblock %}

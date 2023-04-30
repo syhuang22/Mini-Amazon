@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Order Confirmation{% endblock %}
+
+{% block content %}
+  <div class="container mt-5" style="background: linear-gradient(to bottom, #000000, #c36609);">
+    <h1 class="display-4 mb-4 text-white font-weight-bold">Order Confirmation</h1>
+    <p class="display-6 mb-4 text-white font-weight-bold">Your order has been placed successfully!</p>
+    <div class="row mb-5">
+      <div class="col-md-6">
+        <form method="get" action="{% url 'order_status' %}" class="mb-3">
+          <button type="submit" class="btn btn-warning me-3">See order status</button>
+        </form>
+      </div>
+    </div>
+    <div class="row mb-5">
+      <div class="col-md-6">
+        <button onclick="javascript:history.go(-1)" class=class="btn btn-warning btn-sm btn-block">Back to previous page</button>
+      </div>
+    </div>
+  </div>
+{% endblock %}

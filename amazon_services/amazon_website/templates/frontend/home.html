@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Welcome to mini-Amazon{% endblock %}
+
+{% block content %}
+  <div class="container mt-5" style="background: linear-gradient(to bottom, #000000, #c36609);">
+    <img src="{% static 'images/amazon_logo.png' %}" alt="Amazon Logo" class="position-absolute top-0 end-0 m-5" style="max-width: 250px; top: 50px; left: 525px;">
+
+    <h1 class="display-4 mb-4 text-white font-weight-bold">Welcome to mini-</h1>
+    <p class="lead mb-5 text-white">Use the search bar to find products:</p>
+
+    <form method="get" action="/search_result" class="mb-3">
+      <div class="input-group">
+        <input type="text" class="form-control" name="search_input" placeholder="Search..." required>
+        <button type="submit" class="btn btn-warning">Search</button>
+      </div>
+    </form>
+    
+    <form method="get" action="{% url 'register' %}" class="position-absolute top-0 end-0 m-5" style="left: 780px; top: 300px">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-warning">Back to User ID Page</button>
+    </form>
+    
+    <div class="row mb-5">
+      <div class="col-md-6">
+        <button onclick="window.location.href='{% url 'buy' %}'" class="btn btn-warning btn-block btn-mid">Buy Now</button>
+      </div>
+    </div>
+
+    <form method="get" action="{% url 'cart' %}" class="position-absolute top-0 end-0 m-5" style="left: 975px; top: 300px">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-warning" >View Cart</button>
+    </form>
+
+    <form method="get" action="{% url 'order_status' %}" class="position-absolute top-0 end-0 m-5" style="left: 1085px; top: 300px">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-warning">Check Order Status</button>
+    </form>
+
+    <h2 class="mb-3 text-white">List of Products:</h2>
+    <div class="row mb-5">
+      {% for product in products %}
+        <div class="col-md-6">
+          <div class="card bg-light mb-3">
+            <div class="card-body">
+              <h5 class="card-title">{{ product.description }}</h5>
+              <p class="card-text"> Quantity: {{ product.count }}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

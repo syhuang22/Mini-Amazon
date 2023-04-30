@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-5" style="background: linear-gradient(to bottom, #000000, #c36609);">
+    <h1 class="display-4 mb-4 text-white font-weight-bold">Buy a Product</h1>
+    <form method="post">
+      {% csrf_token %}
+      <style>
+        select {
+          border-radius: 20px;
+        }
+      </style>
+      <label for="description" class="display-7 mb-4 text-white font-weight-bold" required>Product:</label>
+      <select name="description" >
+        {% for product in products %}
+          <option value="{{ product.description }}">{{ product.description }}</option>
+        {% endfor %}
+      </select><br>
+      <label for="quantity" class="display-7 mb-4 text-white font-weight-bold">Quantity:</label>
+      <input type="number" name="quantity" min="1" style="border-radius: 20px;" required><br>
+      <label for="destination_x" class="display-7 mb-4 text-white font-weight-bold">Destination X:</label>
+      <input type="number" name="destination_x" style="border-radius: 20px;" required><br>
+      <label for="destination_y" class="display-7 mb-4 text-white font-weight-bold">Destination Y:</label>
+      <input type="number" name="destination_y" style="border-radius: 20px;" required><br>
+      <button type="submit" name="add_to_cart" class="btn btn-warning btn-sm btn-block">Add to Cart</button>
+      <button type="submit" name="buy" class="btn btn-warning btn-sm btn-block">Buy</button>
+    </form>
+
+    {% if error_message %}
+      <p class="display-7 mb-4 text-white font-weight-bold">{{ error_message }}</p>
+    {% endif %}
+
+    <form method="get" action="{% url 'cart' %}" class="position-absolute top-0 end-0 m-5" style="left: 975px; top: 300px">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-warning btn-block">View Cart</button>
+    </form>
+
+    <form method="get" action="{% url 'order_status' %}" class="position-absolute top-0 end-0 m-5" style="left: 1085px; top: 300px">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-warning">Check Order Status</button>
+    </form>
+
+    <form method="get" action="{% url 'home' %}" class="position-absolute top-0 end-0 m-5" style="left: 1300px; top: 300px">
+      <button type="submit" class="btn btn-secondary btn-block">Home</button>
+    </form>
+    
+    <button onclick="javascript:history.go(-1)" class="btn btn-secondary btn-sm btn-block">Back to previous page</button>
+    {% if products %}
+      <h2 class="mb-4 text-white">List of Products:</h2>
+      <div class="row mb-5">
+        {% for product in products %}
+        <div class="col-md-6">
+          <div class="card bg-light mb-3">
+            <div class="card-body">
+              <h5 class="card-title">{{ product.description }}</h5>
+              <p class="card-text">Quantity: {{ product.count }}</p>
+            </div>
+          </div>
+        </div>
+        {% empty %}
+          <li class="display-6 mb-4 text-white font-weight-bold">No products found.</li>
+        {% endfor %}
+    {% else %}
+        <p class="display-6 mb-4 text-white font-weight-bold">Product is empty.</p>
+    {% endif %}
+
+  </div>
+{% endblock %}

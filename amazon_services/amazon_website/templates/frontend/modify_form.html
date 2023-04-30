@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5" style="background: linear-gradient(to bottom, #000000, #c36609);">
+  {% if product_id %}
+    <h1 class="display-4 mb-4 text-white font-weight-bold">Modify the order</h1>
+    <form method="post" action="{% url 'modify_order' product_id description quantity destination_x destination_y%}">
+      {% csrf_token %}
+      <style>
+        select {
+          border-radius: 20px;
+        }
+      </style>
+      <input type="hidden" name="product_id" value="{{ context.product_id }}">
+      <input type="hidden" name="description" value="{{ context.description }}">
+      <input type="hidden" name="quantity" value="{{ context.quantity }}">
+      <input type="hidden" name="destination_x" value="{{ context.destination_x }}">
+      <input type="hidden" name="destination_y" value="{{ context.destination_y }}">
+      <label for="description" class="display-7 mb-4 text-white font-weight-bold">Product:</label>
+      <select name="description">
+        {% for product in products %}
+          <option value="{{ product.description }}">{{ product.description }}</option>
+        {% endfor %}
+      </select><br>
+      <label for="quantity" class="display-7 mb-4 text-white font-weight-bold">Quantity:</label>
+      <input type="number" name="quantity" min="1" style="border-radius: 20px;" required><br>
+      <label for="destination_x" class="display-7 mb-4 text-white font-weight-bold">Destination X:</label>
+      <input type="number" name="destination_x" style="border-radius: 20px;" required><br>
+      <label for="destination_y" class="display-7 mb-4 text-white font-weight-bold">Destination Y:</label>
+      <input type="number" name="destination_y" style="border-radius: 20px;" required><br>
+      <button type="submit" name="modify_order" class="btn btn-secondary btn-sm btn-block">Edit the order</button>
+    </form>
+  {% endif %}
+</div>
+{% endblock %}
