@@ -1,6 +1,6 @@
 # Mini-Amazon Project
 
-This project is a simulation of a mini-Amazon system, which includes an online store and its interactions with the mini-UPS shipping system. The goal is to develop a system that works seamlessly with the UPS systems in your interoperability group (IG) consisting of 2 groups doing Amazon and 2 groups doing UPS.
+This project is a simulation of a mini-Amazon system, which includes an online store and its interactions with the mini-UPS shipping system. The goal is to develop a system that works seamlessly with the UPS systems.
 
 ## Table of Contents
 
@@ -38,9 +38,3 @@ The world consists of a Cartesian coordinate grid, where addresses are represent
 Amazon and UPS systems can send and receive messages to and from the World simulation server to control their components. The supported commands and responses can be found in the provided `.proto` files (amazon.proto and ups.proto).
 
 For more details on the available Amazon and UPS commands, refer to the [project description](https://github.com/syhuang22/Mini-Amazon/blob/main/amazon_services/proto_files/Mini-Amazon%20Spec.pdf).
-
-## Protocol Specification
-
-The interoperability group (IG) must develop a protocol specification to define how the Amazon and UPS servers will communicate with each other. The protocol should use RFC terminology (MUST/MAY/SHOULD) to precisely describe the system's behavior.
-
-A protocol specification document must be submitted by the specified deadline. Any revisions to the protocol should be indicated in the document using colored text for deleted (red) and added (blue) sections.
